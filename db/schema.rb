@@ -13,21 +13,21 @@
 
 ActiveRecord::Schema.define(version: 20200624175350) do
 
-  create_table "author", force: :cascade do |t|
+  create_table "authors", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "book", force: :cascade do |t|
+  create_table "books", force: :cascade do |t|
     t.string  "title"
     t.integer "author_id"
     t.integer "genre_id"
   end
 
-  create_table "genre", force: :cascade do |t|
+  create_table "genres", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "user", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password"

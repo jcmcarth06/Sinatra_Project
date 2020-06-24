@@ -1,6 +1,6 @@
-class CreateBook < ActiveRecord::Migration
+class CreateBooks < ActiveRecord::Migration
   def change
-    create_table :book do |t|
+    create_table :books do |t|
       t.string :title
       t.integer :author_id #foreign key
       t.integer :genre_id

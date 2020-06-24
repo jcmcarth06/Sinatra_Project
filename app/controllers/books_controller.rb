@@ -19,7 +19,7 @@ class BooksController < ApplicationController
 
     post '/books' do
         if logged_in?
-            if params[:title] == ""
+            if params[:content] == ""
               redirect to "/books/new"
             else
                 @book = current_user.books.build(title: params[:title], author: params[:author], genre: params[:genre] )
