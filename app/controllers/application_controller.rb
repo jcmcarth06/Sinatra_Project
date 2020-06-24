@@ -5,10 +5,20 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "bookclub_secret"
   end
 
-  get "/" do
+  get '/' do
     erb :index
+  end
+
+  get '/signup' do
+     erb :'users/signup'
+  end
+
+  get '/login' do
+    erb :'users/login'
   end
 
   helpers do

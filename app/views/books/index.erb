@@ -1,0 +1,7 @@
+<p> Welcome, <%= current_user.username %>
+<h2> Reading List </h2>
+<% @books.each do |book| %>
+  <div>
+    <%= book.content %>
+  </div>
+<% end %>
