@@ -1,5 +1,10 @@
 class BooksController < ApplicationController
 
+    get '/books/:slug' do
+        @book = Book.find_by_slug(params[:slug])
+        erb :'books/show'
+    end
+
     get '/books' do
         if logged_in?
             @book = Book.all
