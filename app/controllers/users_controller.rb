@@ -14,10 +14,10 @@ class UsersController < ApplicationController
       end
 
     post '/signup' do
-        if params[:username] == "" || params[:email] == "" || params[:password] == ""
+        if params[:name] == "" || params[:email] == "" || params[:password] == ""
             redirect to '/signup'
         else
-            @user = User.new(:name => params[:username], :email => params[:email], :password => params[:password])
+            @user = User.new(:name => params[:name], :email => params[:email], :password => params[:password])
             @user.save
             session[:user_id] = @user.id
             redirect to '/books'
@@ -29,18 +29,6 @@ class UsersController < ApplicationController
             erb :'users/login'
         else
             redirect to '/books'
-        end
-    end
-  
-    post '/login' do
-        
-        user = User.find_by_name(params[:name])
-        if user && user.authenticate(params[:password])
-            session[:user_id] = user.id
-            binding.pry
-            erb :'books/index'
-        else
-            redirect to '/signup'
         end
     end
 

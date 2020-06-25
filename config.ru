@@ -6,7 +6,6 @@ end
 
 use Rack::MethodOverride #mounting controllers
 run ApplicationController #inherit from application controller
-use AuthorsController
 use BooksController
 use GenresController
 use UsersController
