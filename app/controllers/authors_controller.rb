@@ -3,6 +3,9 @@ require './config/environment'
 class AuthorsController < ApplicationController
 
     get '/authors' do
+        @authors = Author.all 
+
+        erb :"authors/index/"
     
     end
 

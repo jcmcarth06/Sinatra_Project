@@ -2,6 +2,6 @@
 <h2> Reading List </h2>
 <% @books.each do |book| %>
   <div>
-    <%= book.content %>
+<li><a href="/books/<%= book.id %>"<%= book.title %></li>
   </div>
 <% end %>
