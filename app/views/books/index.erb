@@ -1,7 +1,16 @@
-<p> Welcome, <%= current_user.username %>
+ Welcome, <%= current_user.name %>
 <h2> Reading List </h2>
 <% @books.each do |book| %>
+  
   <div>
-<li><a href="/books/<%= book.id %>"<%= book.title %></li>
+<li><a href="/books/<%= book.id %>"<%= book.title %></a></li>
+  
+
+ 
+  <form method="POST" action="books/edit">
+    <input type="text" name="edit" id="edit" placeholder="Edit a Book"><br>
   </div>
 <% end %>
+
+
+<a href="/books/new" > Add a Book </a>

@@ -1,10 +1,5 @@
 class BooksController < ApplicationController
 
-    get '/books/:slug' do
-        @book = Book.find_by_slug(params[:slug])
-        erb :'books/show'
-    end
-
     get '/books' do
         if logged_in?
             @books = Book.all
@@ -16,6 +11,7 @@ class BooksController < ApplicationController
 
     get '/books/new' do
         if logged_in?
+            @genres = Genre.all
             erb :'books/new'
         else
             redirect to '/login'
@@ -24,7 +20,7 @@ class BooksController < ApplicationController
 
     post '/books' do
         if logged_in?
-            if params[:content] == ""
+            if params[:title] == "" || params[:author] == "" 
                 redirect to "/books/new"
             else
                 @book = current_user.books.build(title: params[:title], author: params[:author], genre: params[:genre] )
