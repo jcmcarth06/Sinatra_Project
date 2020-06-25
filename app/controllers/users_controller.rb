@@ -6,14 +6,14 @@ class UsersController < ApplicationController
     end
   
     get '/signup' do
-        if !logged_in?
+        verify_logged_in
             erb :'users/signup'
         else
             redirect to '/books'
         end
     end
   
-    post '/users/signup' do
+    post '/signup' do
         if params[:name] == "" || params[:email] == "" || params[:password] == ""
             redirect to '/signup'
         else
@@ -25,7 +25,6 @@ class UsersController < ApplicationController
     end
   
     get '/login' do
-        if !logged_in?
             erb :'users/login'
         else
             redirect to '/books'
@@ -33,10 +32,11 @@ class UsersController < ApplicationController
     end
   
     post '/login' do
-        binding.pry
-        user = User.find_by(params[:name])
+        
+        user = User.find_by_name(params[:name])
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
+            binding.pry
             erb :'books/index'
         else
             redirect to '/signup'

@@ -6,24 +6,18 @@ class BooksController < ApplicationController
     end
 
     get '/books' do
-        if logged_in?
-            @book = Book.all
+        verify_logged_in
+            @books = Book.all
             erb :'books/index'
-        else
-            redirect to '/login'
-        end
     end
 
     get 'books/new' do
-        if logged_in?
+        verify_logged_in
             erb :'books/new'
-        else
-            redirect to '/login'
-        end
     end
 
     post '/books' do
-        if logged_in?
+        verify_logged_in
             if params[:content] == ""
               redirect to "/books/new"
             else
@@ -34,35 +28,26 @@ class BooksController < ApplicationController
                     redirect to "/books/new"
                 end
             end
-        else
-            redirect to '/login'
-        end
     end
 
     get '/books/:id' do
-        if logged_in?
+        verify_logged_in
             @book = Book.find_by_id(params[:id]) #shows the book by its individual id
             erb :'books/show_book'
-        else
-            redirect to '/login'
-        end
     end
 
     get '/books/:id/edit' do
-        if logged_in?
+        verify_logged_in
             @book = book.find_by_id(params[:id])
             if @book && @book.user == current_user #only the user can edit their own book
                 erb :'books/edit_book'
             else
                 redirect to '/books'
             end
-        else
-            redirect to '/login'
-        end
     end
 
     patch '/books/:id' do
-        if logged_in?
+        verify_logged_in
             if params[:content] == ""
               redirect to "/books/#{params[:id]}/edit"
             else
@@ -77,21 +62,15 @@ class BooksController < ApplicationController
                     redirect to '/books'
                 end
             end
-        else
-            redirect to '/login'
-        end
     end
 
     delete '/books:id' do
-        if logged_in?
+        verify_logged_in
             @book = book.find_by_id(params[:id])
             if @book && @book.user == current_user
                 @book.delete
             end
             redirect to '/books'
-        else
-            redirect to '/login'
-        end
     end
 
 end
