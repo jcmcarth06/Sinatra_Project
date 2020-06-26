@@ -23,9 +23,8 @@ class BooksController < ApplicationController
             if params[:title] == "" || params[:author] == "" 
                 redirect to "/books/new"
             else
-                @book = current_user.books.build(title: params[:title], author: params[:author], genre: params[:genre] )
+                @book = current_user.books.build(title: params[:title], author: params[:author], genre_id: params[:genre_id])
                 if @book.save
-                    # binding.pry
                     erb :"books/show_book"
                     
                 else
@@ -33,7 +32,7 @@ class BooksController < ApplicationController
                 end
             end
         else
-            redirect to '/login'
+            redirect to "/login"
         end
     end
 
@@ -53,7 +52,7 @@ class BooksController < ApplicationController
             if @book && @book.user == current_user  #only the user can edit their own book
                 erb :'books/edit_book'
             else
-                redirect to '/books'
+                redirect to "/books"
             end
         else
             redirect to '/login'
