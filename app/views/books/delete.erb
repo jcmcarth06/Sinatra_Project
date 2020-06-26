@@ -1,9 +1,10 @@
 <h1> <%= @book.title %> </h1>
 <h2> <%= @book.author %> <i>(<%= @book.genre.try(:name) %>)</i></h2>
 <div>
-<strong> Remove this book from the Reading List? </strong>
+<strong> Remove this book from the Reading List? </strong><br><br>
 
-<form method="post" action="/books/<%=@book.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="Remove">
-  <input type="submit" value="Remove Book">
-</form>
+<strong><a href="/books/<%=@book.id%>/delete">Remove Book</a>
+/<span class="navigationSpace"/>/
+<a href="/books" >Return to Book List</a></strong>
+
+

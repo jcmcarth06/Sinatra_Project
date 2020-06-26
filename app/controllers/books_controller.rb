@@ -39,7 +39,7 @@ class BooksController < ApplicationController
     get '/books/:id' do
         if logged_in?
             @book = Book.find_by_id(params[:id])
-            erb :'books/show_book'
+            erb :'books/view_book'
         else
             redirect to '/login'
         end
@@ -48,7 +48,6 @@ class BooksController < ApplicationController
     get '/books/:id/edit' do
         if logged_in?
             @book = Book.find_by_id(params[:id])
-            binding.pry
             if @book && @book.user == current_user  #only the user can edit their own book
                 erb :'books/edit_book'
             else
@@ -80,10 +79,14 @@ class BooksController < ApplicationController
         end
     end
 
+    get '/books/:id/delete_confirm' do
+        @book = Book.find_by_id(params[:id])
+        erb :"books/delete"
+    end
+
     delete '/books/:id/delete' do
         if logged_in?
             book = Book.find_by_id(params[:id])
-            binding.pry
             if book && book.user == current_user
                 book.delete
             end
