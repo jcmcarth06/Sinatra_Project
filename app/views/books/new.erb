@@ -2,9 +2,10 @@
   <form action='/books' method="post">
     <h2>Add a Book to the Reading List:</h2><br>
       <input type="text" name="title" placeholder="Title"><br><br>
-      <input type="text" name="book" placeholder="Author"><br><br>
+      <input type="text" name="author" placeholder="Author"><br><br>
+
       <% @genres.each do |genre| %>
       <input type="radio" name="genre_id" value="<%= genre.id %>"><%= genre.name %></input><br>
       <% end %><br>
-      <input type="submit" value="Submit Book">
+      <strong><input type="submit" value="Submit Book"></strong>
   </form>

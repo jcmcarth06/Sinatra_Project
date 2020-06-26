@@ -1,12 +1,15 @@
 <h2> Reading List </h2>
 <% @books.each do |book| %>
- 
-  <div>
-<li><a href="/books/<%= book.id %>"<%= book.title %></a></li>
-  
-  <form method="POST" action="books/edit">
-    <input type="text" name="edit" id="edit" placeholder="Edit a Book"><br>
-  </div>
-<% end %>
+<div>
+  <strong><a href="/books/<%= book.id %>" > <%= book.title %> </a></strong>
+  <small><a href="/books/<%= book.id %>/edit"> Edit </a>
+  <span class="navigationSpace"/>
+  <a href="/books/<%= book.id %>/delete"> Delete </a></small>
+  <% end %>
 
-<a href="/books/new" > Add a Book </a>
+<br><br><strong><a href="/books/new" > Add a Book </a></strong>
+
+
+ 
+  
+
