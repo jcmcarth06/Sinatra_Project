@@ -39,7 +39,7 @@ class BooksController < ApplicationController
     get '/books/:id' do
         if logged_in?
             @book = Book.find_by_id(params[:id])
-            erb :'books/view'
+            erb :'books/show'
         else
             redirect to '/login'
         end
@@ -48,7 +48,8 @@ class BooksController < ApplicationController
     get '/books/:id/edit' do
         if logged_in?
             @book = Book.find_by_id(params[:id])
-            if @book && @book.user == current_user  #only the user can edit their own book
+            
+            if @book && @book.user == @current_user  #only the user can edit their own book
                 @genres = Genre.all
                 erb :'books/edit'
             else
@@ -61,18 +62,18 @@ class BooksController < ApplicationController
 
     patch '/books/:id' do
         if logged_in?
-            if params[:title] == "" || params[:author] == ""
+            if params[:title] == "" || params[:author] == "" || params[:genre] == "" || params[:description] == ""
                 redirect to "/books/#{params[:id]}/edit"
             else
                 @book = Book.find_by_id(params[:id])
                 if @book && @book.user == current_user
                     if @book.update(title: params[:title], author: params[:author], genre: [:genre], description: params[:description])
-                        redirect to "/books/#{@book.id}"
+                        redirect to "/books"
                     else
                         redirect to "/books/#{@book.id}/edit"
                     end
                 else
-                    redirect to '/books'
+                    redirect to "/books"
                 end
             end
         else

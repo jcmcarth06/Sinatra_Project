@@ -7,6 +7,9 @@
       <% @genres.each do |genre| %>
       <input type="radio" name="genre_id" value="<%= genre.id %>"><%= genre.name %></input><br>
       <% end %><br>
+      <strong>Blurb:<br><br></strong>
+      <textarea name="description" rows="10" cols="80" id="description"></textarea><br>
+      
       <strong><input type="submit" value="Submit Book"></strong>
   </form>
 

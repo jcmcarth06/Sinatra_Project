@@ -1,9 +1,10 @@
 <h1> <%= @book.title %> </h1>
 <h2> <%= @book.author %> <i>(<%= @book.genre.try(:name) %>)</i></h2>
+ <%= @book.description %><br><br>
 <div>
-<strong>Add this book to the Reading List?<br/><br>
-<a href="/books"> Add Book</a>
-</strong>
-</div>
+<strong><a href="/books/<%= @book.id %>/edit"> Edit</a>
+/<span class="navigationSpace"/>/
+<a href="/books/<%= @book.id %>/delete_confirm"> Delete</a>
 
-
+/<span class="navigationSpace"/>/
+<a href="/books" > Return to Book List </a></strong>
