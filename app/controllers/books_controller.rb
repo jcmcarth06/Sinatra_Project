@@ -23,9 +23,9 @@ class BooksController < ApplicationController
             if params[:title] == "" || params[:author] == "" 
                 redirect to "/books/new"
             else
-                @book = current_user.books.build(title: params[:title], author: params[:author], genre_id: params[:genre_id])
+                @book = current_user.books.build(title: params[:title], author: params[:author], genre_id: params[:genre_id], description: params[:description])
                 if @book.save
-                    erb :"books/show_book"
+                    erb :"books/show"
                     
                 else
                     redirect to "/books/new"
@@ -39,7 +39,7 @@ class BooksController < ApplicationController
     get '/books/:id' do
         if logged_in?
             @book = Book.find_by_id(params[:id])
-            erb :'books/view_book'
+            erb :'books/view'
         else
             redirect to '/login'
         end
@@ -49,7 +49,8 @@ class BooksController < ApplicationController
         if logged_in?
             @book = Book.find_by_id(params[:id])
             if @book && @book.user == current_user  #only the user can edit their own book
-                erb :'books/edit_book'
+                @genres = Genre.all
+                erb :'books/edit'
             else
                 redirect to "/books"
             end
@@ -65,7 +66,7 @@ class BooksController < ApplicationController
             else
                 @book = Book.find_by_id(params[:id])
                 if @book && @book.user == current_user
-                    if @book.update(title: params[:title], author: params[:author])
+                    if @book.update(title: params[:title], author: params[:author], genre: [:genre], description: params[:description])
                         redirect to "/books/#{@book.id}"
                     else
                         redirect to "/books/#{@book.id}/edit"

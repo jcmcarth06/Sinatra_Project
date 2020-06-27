@@ -1,0 +1,14 @@
+<h1> <%= @book.title %> </h1>
+<h2> <%= @book.author %> <i>(<%= @book.genre.try(:name) %>)</i></h2>
+<div>
+<strong>Edit Your Book:</strong><br><br>
+<form method="POST" action = '/books'>
+    <input type="hidden" value="PATCH" name="_method">
+        <input type="text" name="title" placeholder="Title"><br><br>
+        <input type="text" name="author" placeholder="Author"><br><br>
+
+    <% @genres.each do |genre| %>
+    <input type="radio" name="genre_id" value="<%= genre.id %>"><%= genre.name %></input><br>
+    <% end %><br>
+    <strong><input type="submit" value="Submit Change"></strong>
+</form>
