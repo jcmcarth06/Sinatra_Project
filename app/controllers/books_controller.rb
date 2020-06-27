@@ -20,22 +20,18 @@ class BooksController < ApplicationController
 
     post '/books' do
         if logged_in?
-            if params[:title] == "" || params[:author] == "" 
+            if params[:title] == ""
                 redirect to "/books/new"
             else
-                book.title = params[:book][:title]
-                book.genre = Genre.find_by_id(params[:book][:genre_id])
-                book.description = params[:book][:description]
-                book.save
+                @book = current_user.books.build(title: params[:title], author: params[:author], genre_id: params[:genre_id], description: params[:description])
                 if @book.save
-                    erb :"books/show"
-                 
+                    redirect to "/books/#{@book.id}"
                 else
                     redirect to "/books/new"
                 end
             end
         else
-            redirect to "/login"
+          redirect to '/login'
         end
     end
 
@@ -64,7 +60,7 @@ class BooksController < ApplicationController
 
     patch '/books/:id' do
         if logged_in?
-            if params[:title] == ""
+            if params[:title] == "" || params[:author] == "" || params[:genre] == ""
               redirect to "/books/#{params[:id]}/edit"
             else
               @book = Book.find_by_id(params[:id])
