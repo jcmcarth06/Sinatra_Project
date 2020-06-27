@@ -64,12 +64,12 @@ class BooksController < ApplicationController
 
     patch '/books/:id' do
         if logged_in?
-            if params[:title] == "", params[:author] == "", params[:genre] == ""
+            if params[:title] == ""
               redirect to "/books/#{params[:id]}/edit"
             else
               @book = Book.find_by_id(params[:id])
               if @book && @book.user == current_user
-                if @book.update(title: params[:title], author: params[:author], genre: params[:genre], description: params[:description])
+                if @book.update(title: params[:title], author: params[:author], genre_id: params[:genre_id], description: params[:description])
                   redirect to "/books/#{@book.id}"
                 else
                   redirect to "/books/#{@book.id}/edit"
