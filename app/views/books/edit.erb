@@ -2,19 +2,15 @@
 <h2> <%= @book.author %> <i>(<%= @book.genre.try(:name) %>)</i></h2>
 <div>
 <strong>Edit Your Book:</strong><br><br>
-<form method="POST" action = '/books'>
+<form method="POST" action = '/books/<%=@book.id%>'>
     <input type="hidden" value="PATCH" name="_method">
-        <input type="text" name="title" placeholder="<%= @book.title %>"><br><br>
-        <input type="text" name="author" placeholder="<%= @book.author %>"><br><br>
+        <input type="text" name="title" value="<%= @book.title %>"><br><br>
+        <input type="text" name="author" value="<%= @book.author %>"><br><br>
 
     <% @genres.each do |genre| %>
     <input type="radio" name="genre_id" value="<%= genre.id %>"><%= genre.name %></input><br>
     <% end %><br>
     <strong>Blurb:<br><br></strong>
-    <textarea name="description" rows="10" cols="80" ><%= @book.description %></textarea><br>
-</form>
-
-<form method="post" action="/books/<%=@book.id%>/edit">
-    <input id="hidden" type="hidden" name="_method" value="PATCH">
-    <input type="submit" value="Submit Change">
+    <textarea name="description" rows="10" cols="80" ><%= @book.description %></textarea><br><br>
+      <input type="submit" value="Submit Change">
 </form>

@@ -16,8 +16,7 @@
     background-image: url("https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555286397/shape/mentalfloss/istock-464615957_0.png");
     background-size: cover;
     background-color: coral;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
     color: #333;
     font-family: 'Courier New', Courier, monospace;
     line-height: 18px;
