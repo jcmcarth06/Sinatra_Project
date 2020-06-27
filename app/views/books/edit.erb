@@ -13,6 +13,8 @@
     <strong>Blurb:<br><br></strong>
     <textarea name="description" rows="10" cols="80" ><%= @book.description %></textarea><br>
 </form>
-<h2><a href="/books">Submit Change</a></h2>
-   
+
+<form method="post" action="/books/<%=@book.id%>/edit">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <input type="submit" value="Submit Change">
 </form>

@@ -48,7 +48,6 @@ class BooksController < ApplicationController
     get '/books/:id/edit' do
         if logged_in?
             @book = Book.find_by_id(params[:id])
-            
             if @book && @book.user == @current_user  #only the user can edit their own book
                 @genres = Genre.all
                 erb :'books/edit'
