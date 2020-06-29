@@ -1,4 +1,4 @@
-<h1> Welcome to Book Club! </h1>
+<h1> Welcome to The Book Club! </h1>
 <h2> Create a team oriented reading list with your friends! </h2>
 <p>Please sign up or sign in:</p>
 <nav>
@@ -7,7 +7,7 @@
     <a href="/logout"> Log Out </a>
     <p>Welcome, <%=current_user.username %></p>
   <% else %>
-    <a href="/signup">Sign Up</a>
-    <a href="/login"> Sign In </a>
+    <strong><a href="/signup">Sign Up</a>
+    <a href="/login"> Sign In </a></strong>
   <%end %>
 </nav>
