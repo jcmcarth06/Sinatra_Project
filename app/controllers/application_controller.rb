@@ -32,14 +32,15 @@ class ApplicationController < Sinatra::Base
     def current_user
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
+  end
+
+  private
 
     def verify_logged_in
-      if logged_in?
-      else
-        # put error here
+      if !logged_in?
           redirect to "/login"
       end
     end
-  end
+  
 
 end
