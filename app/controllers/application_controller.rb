@@ -10,6 +10,11 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "bookclub_secret"
   end
 
+  not_found do
+    status 404
+    erb :error
+  end
+
   get '/' do
     if logged_in? 
       redirect to '/books'
@@ -19,6 +24,7 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
+    
     def logged_in?
       !!current_user
     end
