@@ -65,7 +65,11 @@ class BooksController < ApplicationController
     get '/books/:id/delete_confirm' do
         verify_logged_in
         @book = Book.find_by_id(params[:id])
-        erb :"books/delete"
+        if @book.user == current_user
+            erb :"/books/delete"
+        else
+            redirect to "/books"
+        end
     end
 
     delete '/books/:id/delete' do

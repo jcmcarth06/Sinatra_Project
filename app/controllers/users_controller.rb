@@ -9,10 +9,8 @@ class UsersController < ApplicationController
       end
 
     post '/signup' do
-        if params[:name] == "" || params[:email] == "" || params[:password] == ""
+        if params[:name] == "" || params[:email] == "" || params[:password] == ""|| User.find_by_name(params[:name])
             redirect to '/signup'
-        # elsif User.all.any? { |user| user.name.downcase == params[:name].downcase}
-        #     redirect to '/signup'
         else
             @user = User.new(:name => params[:name], :email => params[:email], :password => params[:password])
             @user.save
